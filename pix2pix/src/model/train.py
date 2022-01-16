@@ -4,7 +4,7 @@ import time
 import numpy as np
 import models
 from keras.utils import generic_utils
-from keras.optimizers import Adam, SGD
+from tensorflow.keras.optimizers import Adam, SGD
 import keras.backend as K
 # Utils
 sys.path.append("../utils")
