@@ -3,7 +3,7 @@ from keras.layers.core import Flatten, Dense, Dropout, Activation, Lambda, Resha
 from keras.layers.convolutional import Conv2D, Deconv2D, ZeroPadding2D, UpSampling2D
 from keras.layers import Input, Concatenate
 from keras.layers.advanced_activations import LeakyReLU
-from keras.layers.normalization import BatchNormalization
+from keras.layers import BatchNormalization
 from keras.layers.pooling import MaxPooling2D
 import keras.backend as K
 import numpy as np
@@ -89,7 +89,7 @@ def generator_unet_upsampling(img_dim, bn_mode, model_name="generator_unet_upsam
 
     nb_filters = 64
 
-    if K.image_dim_ordering() == "channels_first":
+    if K.image_data_format() == "channels_first":
         bn_axis = 1
         nb_channels = img_dim[0]
         min_s = min(img_dim[1:])
@@ -210,7 +210,7 @@ def DCGAN_discriminator(img_dim, nb_patch, bn_mode, model_name="DCGAN_discrimina
 
     list_input = [Input(shape=img_dim, name="disc_input_%s" % i) for i in range(nb_patch)]
 
-    if K.image_dim_ordering() == "channels_first":
+    if K.image_data_format() == "channels_first":
         bn_axis = 1
     else:
         bn_axis = -1
